@@ -4,15 +4,16 @@ import { Context } from '../index'
 import '../site.css'
 import Animal from '../components/Animal'
 
-const AnimalList = observer(() => {
-    const {list} = useContext(Context)
+function AnimalList() {
+    const { list } = useContext(Context);
+
     return (
         <div className='gridContainer'>
             {list.animals.map(animal => (
-                <Animal key={animal.id} animal={animal}/>
+                <Animal key={animal.id} animal={animal} />
             ))}
         </div>
-    )
-})
+    );
+}
 
-export default AnimalList
+export default observer(AnimalList);

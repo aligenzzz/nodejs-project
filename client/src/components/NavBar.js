@@ -9,8 +9,8 @@ const NavBar = observer(() => {
     const {user} = useContext(Context)
 
     const logout = () => {
-        user.setUser(null);
-        user.setIsAuth(false);
+        user.setUser(null)
+        user.setIsAuth(false)
     }
 
     return (
@@ -20,7 +20,7 @@ const NavBar = observer(() => {
             {user.isAuth ? 
                 <>
                     <NavLink to={ADMIN_ROUTE} className="navlink">Admin</NavLink>
-                    <NavLink className="navlink" onClick={logout}>Logout</NavLink>
+                    <NavLink to={HOME_ROUTE} className="navlink" onClick={logout}>Logout</NavLink>
                 </>
              :
                 <NavLink to={LOGIN_ROUTE} className="navlink">Login</NavLink>

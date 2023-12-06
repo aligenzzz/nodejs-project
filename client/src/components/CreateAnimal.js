@@ -165,14 +165,14 @@ const CreateAnimal = ({ onSubmit, onCancel }) => {
               <input type='text' value={this.state.description} placeholder='Description'
                      onChange={this.onDescriptionChange} style={{borderColor:descriptionColor}}/>
             </p>
-            <select>
+            <select onChange={this.onPlacementChange}>
               {this.state.placements.map((placement) => (
                 <option key={placement.id} value={placement.id}>
                   {placement.name}
                 </option>
               ))}
             </select>
-            <select>
+            <select onChange={this.onInformationChange}>
               {this.state.informations.map((information) => (
                 <option key={information.id} value={information.id}>
                   {information.animal_class + ' ' + information.species}

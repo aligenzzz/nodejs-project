@@ -24,7 +24,6 @@ class AnimalController {
             else if (informationId && placementId) {
                 animals = await Animal.findAndCountAll({where:{informationId, placementId}, limit, offset})
             }
-
             
             if (search) {
                 var filtered = animals.rows.filter(function(element) {
@@ -50,6 +49,17 @@ class AnimalController {
         }  
     }
 
+    async getByName(req, res) {
+        try {
+            const {name} = req.query
+            console.log(name)
+            const animal = await Animal.findOne({where: {name}})
+            return res.json(animal)
+        } catch (e) {
+            return res.json(ApiError.badRequest(e.message))
+        }  
+    }
+
     async create(req, res) {
         try {
             const {name, admission, birth, image, description, informationId, placementId} = req.body
@@ -64,7 +74,8 @@ class AnimalController {
         try {
             const {id} = req.params
             const {name, admission, birth, image, description, informationId, placementId} = req.body
-            const animal = await Animal.update({id, name, admission, birth, image, daily_feed, description, informationId, placementId})
+            const animal = await Animal.update({name, admission, birth, image, description, informationId, placementId},
+                {where: {id}})
             return res.json(animal)
         } catch (e) {
             return res.json(ApiError.badRequest(e.message))
@@ -74,7 +85,7 @@ class AnimalController {
     async delete(req, res) {
         try {
             const {id} = req.params
-            await Animal.delete({id})
+            await Animal.destroy({where: {id}})
             return res.json("Success!")
         } catch (e) {
             return res.json(ApiError.badRequest(e.message))

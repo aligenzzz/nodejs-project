@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import '../site.css'
+import TimeZone from '../components/TimeZone'
 
 const Home = () => {
   const [imageUrl, setImageUrl] = useState('')
@@ -25,6 +26,7 @@ const Home = () => {
   return (
     <div align='center'>
         <div style={{margin: '50px'}}>
+            <TimeZone />
             <h3 style={{margin: '20px', fontSize: '20px', color: '#555555'}}>{fact}</h3>
             <img src={imageUrl} alt="Random Dog" />
         </div>  

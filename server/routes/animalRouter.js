@@ -1,11 +1,13 @@
 const Router = require('express')
 const router = Router()
 const animalController = require('../controllers/animalController')
+const authMiddleware = require('../middleware/authMiddleware')
 
 router.get('/', animalController.getAll)
+router.get('/by', animalController.getByName)
 router.get('/:id', animalController.get)
-router.post('/', animalController.create)
-router.put('/:id', animalController.edit)
-router.delete('/:id', animalController.delete)
+router.post('/', authMiddleware, animalController.create)
+router.put('/:id', authMiddleware, animalController.edit)
+router.delete('/:id', authMiddleware, animalController.delete)
 
 module.exports = router

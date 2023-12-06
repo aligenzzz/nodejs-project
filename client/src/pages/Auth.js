@@ -19,13 +19,35 @@ const Auth = observer(() => {
         history(HOME_ROUTE)
     }
 
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+    function isNonEmptyString(str) {
+        const nonEmptyRegex = /\S/;
+        return nonEmptyRegex.test(str);
+    }
+
     const click = async () => {
         try {
             let data
             if (isLogin) {
                 data = await login(username, password)
+                if (data.status == 404) {
+                    alert('Invalid data!')
+                    return
+                }
             } else {
-                data = await registration(username, email, password)
+                if (isValidEmail(email) && isNonEmptyString(username) && isNonEmptyString(password)) {
+                        data = await registration(username, email, password)
+                    if (data.status == 404) {
+                        alert('Invalid data!')
+                        return
+                    }
+                } else {
+                    alert('Invalid data!')
+                    return
+                }   
             }   
             
             user.setUser(data)

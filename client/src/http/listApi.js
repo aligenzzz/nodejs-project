@@ -46,7 +46,17 @@ export const getAnimals = async (informationId, placementId, limit, page, search
 }
 export const getAnimal = async (id) => {
     try {
-        const {data} = await $host.get('api/animal' + id)
+        const {data} = await $host.get('api/animal/' + id)
+        return data
+    } catch (e) {
+        console.log(e.message)
+    }
+}
+export const getAnimalByName = async (name) => {
+    try {
+        const {data} = await $host.get('api/animal/by', {params: {
+            name
+        }})
         return data
     } catch (e) {
         console.log(e.message)
@@ -55,6 +65,22 @@ export const getAnimal = async (id) => {
 export const createAnimal = async (animal) => {
     try {
         const {data} = await $authHost.post('api/animal', animal)
+        return data
+    } catch (e) {
+        console.log(e.message)
+    }
+}
+export const updateAnimal = async (animal) => {
+    try {
+        const {data} = await $authHost.put('api/animal/' + animal.id, animal)
+        return data
+    } catch (e) {
+        console.log(e.message)
+    }
+}
+export const deleteAnimal = async (id) => {
+    try {
+        const {data} = await $authHost.delete('api/animal/' + id)
         return data
     } catch (e) {
         console.log(e.message)
