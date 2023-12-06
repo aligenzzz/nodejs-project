@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import '../site.css'
 import TimeZone from '../components/TimeZone'
+import { observer } from "mobx-react-lite"
 
-const Home = () => {
+const Home = observer(() => {
   const [imageUrl, setImageUrl] = useState('')
   const [fact, setFact] = useState('')
 
@@ -32,6 +33,6 @@ const Home = () => {
         </div>  
     </div>
   )
-}
+})
 
 export default Home

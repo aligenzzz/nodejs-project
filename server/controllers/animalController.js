@@ -91,6 +91,15 @@ class AnimalController {
             return res.json(ApiError.badRequest(e.message))
         }
     }
+
+    async getTime(req, res) {
+        let animals = await Animal.findAll();
+
+        res.json([
+            new Date(Math.max(...animals.map(u => u.updatedAt))).toLocaleString(),
+            new Date(Math.max(...animals.map(u => u.updatedAt))).toUTCString() 
+        ]);
+    }
 }
 
 module.exports = new AnimalController()

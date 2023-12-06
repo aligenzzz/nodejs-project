@@ -86,3 +86,11 @@ export const deleteAnimal = async (id) => {
         console.log(e.message)
     }
 }
+export const getTime = async () => {
+    try {
+        const {data} = await $authHost.get('api/animal/time')
+        return data
+    } catch (e) {
+        console.log(e.message)
+    }
+}
