@@ -121,7 +121,9 @@ const CreateAnimal = ({ onSubmit, onCancel }) => {
               placementId: placement,
               informationId: information
             }
+            console.log(animal)
             const data = createAnimal(animal).then(data => {
+              console.log(data)
               if (data.status == 404) {
                 alert('Invalid data!')
               }
